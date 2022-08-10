@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include <string>
+#include "btaheader.h"
 
 struct FileOrigin
 {
@@ -13,6 +14,8 @@ struct ArchiveConfig
 {
 	std::string archivePath;
 	std::vector<FileOrigin> origins;
+	BtaCompression compressionType = BtaCompression::NONE;
+	BtaEncryption encryptionType = BtaEncryption::NONE;
 };
 
 struct Configuration

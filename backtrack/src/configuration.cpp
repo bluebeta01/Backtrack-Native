@@ -62,5 +62,15 @@ void Configuration::loadConfigFromFile(const std::string& filePath)
 			FileOrigin& fileOrigin = currentArchiveConfig.origins.back();
 			fileOrigin.excludes.push_back(exclude);
 		}
+
+		if (line.rfind("compression ", 0) == 0)
+		{
+			std::string compression = line.substr(12);
+			auto it = std::find_if(compression.begin(), compression.end(), [](char c) {return !std::isspace<char>(c, std::locale::classic()); });
+			compression.erase(compression.begin(), it);
+			ArchiveConfig& currentArchiveConfig = Configuration::archiveConfigs.back();
+			if (compression == "zlib")
+				currentArchiveConfig.compressionType = BtaCompression::ZLIB;
+		}
 	}
 }
