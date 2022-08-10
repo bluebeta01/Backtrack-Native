@@ -1,0 +1,22 @@
+Backtrack Archive File Header:
+uint32 magicNumber 0x42544146
+uint32 btaVersion 1
+uint32 identifier
+uint32 archiveTime
+uint32 encryptionType //0: No Encryption; 1: AES-256-CBC
+uint32 compressionType //0: No Compression; 1: zlib
+uint32 fileCount
+uint64[fileCount] fileHeaderOffsets 
+
+File Header Encrypted:
+uint64 encryptedBlobSize
+uint8[encryptedBlobSize] encryptedBlob
+
+File Header Decrypted:
+uint32 creationTime
+uint32 modifyTime
+uint64 compressedEncryptedSize
+uint64 compressedSize
+uint64 fileSize
+string filePath
+uint8[compressedEncryptedSize] fileBlob
