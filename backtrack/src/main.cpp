@@ -1,47 +1,15 @@
-#include <archive.h>
-#include <vector>
-#include <string>
-#include <iostream>
-#include <filesystem>
+#include "args.h"
 #include "configuration.h"
 
 
-int main()
+int main(int argc, char* argv[])
 {
-	Configuration::loadConfigFromFile("D:/exampleconfig.txt");
-
-	/*std::vector<std::string> files;
-	for (const std::filesystem::directory_entry& dir_entry : std::filesystem::recursive_directory_iterator("C:/Espressif/"))
+	if (!Args::parseArguments(argc, argv))
 	{
-		if (dir_entry.is_directory())
-			continue;
-		try
-		{
-			files.push_back(dir_entry.path().string());
-		}
-		catch(std::exception e) {}
+		Args::printUsage();
+		return -1;
 	}
+	Configuration::loadConfigFromFile(Args::configFilePath);
 
-	printf("Uncompressed...\n");
-	Archive::createArchive("C:/misc/btatest", "espressif_uncompressed", 0, files, BtaEncryption::NONE, BtaCompression::NONE);
-	printf("Compressed...\n");
-	Archive::createArchive("C:/misc/btatest", "espressif_zlib", 0, files, BtaEncryption::NONE, BtaCompression::ZLIB);
 
-	Archive a = {};
-	a.open("C:/misc/btatest/espressif_uncompressed.bta");
-	for (const FileDescriptor& desc : a.fileDescriptors)
-	{
-		std::cout << "[uncompressed]: " << desc.filePath << "\n";
-		a.extractFile(desc, "C:/misc/btatest/uncompressed_out");
-	}
-	a.close();
-
-	a = {};
-	a.open("C:/misc/btatest/espressif_zlib.bta");
-	for (const FileDescriptor& desc : a.fileDescriptors)
-	{
-		std::cout << "[zlib]: " << desc.filePath << "\n";
-		a.extractFile(desc, "C:/misc/btatest/zlib_out");
-	}
-	a.close();*/
 }
