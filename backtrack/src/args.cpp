@@ -3,6 +3,7 @@
 #include "args.h"
 
 std::string Args::configFilePath;
+std::vector<std::string> Args::btanames = {"all"};
 
 bool Args::parseArguments(int argc, char* argv[])
 {
@@ -14,6 +15,8 @@ bool Args::parseArguments(int argc, char* argv[])
 		std::string arg = argv[i];
 		if (arg == "-config" && i < argc - 1)
 			Args::configFilePath = argv[i + 1];
+		if (arg == "-bta" && i < argc - 1)
+			Args::btanames.push_back(argv[i + 1]);
 	}
 
 	if (Args::configFilePath == "")
