@@ -11,5 +11,14 @@ int main(int argc, char* argv[])
 	}
 	Configuration::loadConfigFromFile(Args::configFilePath);
 
+	for (const std::string& btaname : Args::btanames)
+	{
+		auto archiveConfig = std::find_if(Configuration::archiveConfigs.begin(), Configuration::archiveConfigs.end(), [btaname](const ArchiveConfig& config) {
+			return config.name == btaname;
+		});
+		if (archiveConfig == Configuration::archiveConfigs.end())
+			continue;
 
+		
+	}
 }
