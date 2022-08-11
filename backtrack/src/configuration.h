@@ -13,6 +13,7 @@ struct FileOrigin
 struct ArchiveConfig
 {
 	std::string archivePath;
+	std::string name;
 	std::vector<FileOrigin> origins;
 	BtaCompression compressionType = BtaCompression::NONE;
 	BtaEncryption encryptionType = BtaEncryption::NONE;

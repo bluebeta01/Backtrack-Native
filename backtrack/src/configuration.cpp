@@ -72,5 +72,14 @@ void Configuration::loadConfigFromFile(const std::string& filePath)
 			if (compression == "zlib")
 				currentArchiveConfig.compressionType = BtaCompression::ZLIB;
 		}
+
+		if (line.rfind("name ", 0) == 0)
+		{
+			std::string btaname = line.substr(5);
+			auto it = std::find_if(btaname.begin(), btaname.end(), [](char c) {return !std::isspace<char>(c, std::locale::classic()); });
+			btaname.erase(btaname.begin(), it);
+			ArchiveConfig& currentArchiveConfig = Configuration::archiveConfigs.back();
+			currentArchiveConfig.name = btaname;
+		}
 	}
 }
